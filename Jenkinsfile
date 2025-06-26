@@ -13,7 +13,7 @@ spec:
   serviceAccountName: jenkins-admin
   containers:
   - name: jnlp
-    image: jenkins/inbound-agent:4.13.3-1-jdk11
+    image: jenkins/inbound-agent:latest
     volumeMounts:
     - name: docker-sock
       mountPath: /var/run/docker.sock
