@@ -74,15 +74,17 @@ spec:
         
         stage('Build and Push Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials',usernameVariable: 'DOCKER_USERNAME',passwordVariable:'DOCKER_PASSWORD')]) 
                 container('docker') {
-                  script {
-                    sh """
-                        REPO = "akshaypgore"
-                        docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-                        docker push ${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
-                        docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-                    """
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials',usernameVariable: 'DOCKER_USERNAME',passwordVariable:'DOCKER_PASSWORD')]) 
+                    {
+                      sh """
+                          REPO = "akshaypgore"
+                          docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+                          docker push ${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
+                          docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                      """
+                    }
                   }
                 }
             }
