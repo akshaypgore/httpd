@@ -62,12 +62,11 @@ spec:
             steps {
                 container('helm') {
                     script {
-                        def chartName = 'app-1.0.0.tgz'
                         sh """
                             helm version
                             helm repo add helm-charts https://akshaypgore.github.io/helm-charts
                             helm repo update
-                            helm upgrade --install --namespace ${params.ENVIRONMENT} httpd ${chartName}  --values values.yaml
+                            helm upgrade --install --namespace ${params.ENVIRONMENT} httpd helm-charts/app-1.0.0.tgz  --values values.yaml
                         """
                     }
                 }
