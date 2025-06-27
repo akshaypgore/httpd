@@ -72,6 +72,17 @@ spec:
                 }
             }
         }
+
+        stage('Read app propertites'){
+            steps {
+                container('buildtools') {
+                    sh """
+                      VERSION=$(cat src/version.txt)
+                      echo $VERSION
+                    """
+                }
+            }
+        }
         
         stage('Build and Push Docker Image') {
             steps {
