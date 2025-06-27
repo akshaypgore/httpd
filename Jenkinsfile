@@ -59,7 +59,6 @@ spec:
     }
     
     environment {
-        IMAGE_NAME = 'myapp'
         REPO = 'akshaygore'
     }
     
@@ -77,6 +76,9 @@ spec:
                 container('buildtools') {
                   script {
                     env.VERSION = readFile('src/version.txt').trim()
+                    def gitUrl = scm.getUserRemoteConfigs()[0].getUrl()
+                    def repoName = gitUrl.tokenize('/').last().replace('.git', '')
+                    env.IMAGE_NAME = repoName
                   }
                 }
             }
