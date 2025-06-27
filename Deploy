@@ -62,11 +62,10 @@ spec:
             steps {
                 container('helm') {
                     script {
-                        def chartName = 'myapp-chart'
-                        // def releaseName = "myapp-${params.ENVIRONMENT}"
+                        def chartName = 'app-1.0.0.tgz'
                         sh """
                             helm version
-                            
+                            ls -l
                         """
                     }
                 }
