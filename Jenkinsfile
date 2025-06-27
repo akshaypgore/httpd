@@ -75,6 +75,7 @@ spec:
         stage('Build and Push Docker Image') {
             steps {
                 container('docker') {
+                  script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials',usernameVariable: 'DOCKER_USERNAME',passwordVariable:'DOCKER_PASSWORD')]) 
                     sh """
                         REPO = "akshaypgore"
@@ -82,6 +83,7 @@ spec:
                         docker push ${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
                         docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
                     """
+                  }
                 }
             }
         }
