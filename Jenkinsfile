@@ -76,10 +76,7 @@ spec:
             steps {
                 container('buildtools') {
                   script {
-                    sh '''
-                        VERSION=$(cat src/version.txt)
-                        env.VERSION = $VERSION
-                    '''
+                    env.VERSION = readFile('src/version.txt').trim()
                   }
                 }
             }
