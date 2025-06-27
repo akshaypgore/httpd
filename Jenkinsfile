@@ -60,7 +60,6 @@ spec:
     
     environment {
         IMAGE_NAME = 'myapp'
-        IMAGE_TAG = "${BUILD_NUMBER}"
         REPO = 'akshaygore'
     }
     
@@ -79,7 +78,7 @@ spec:
                   script {
                     sh '''
                         VERSION=$(cat src/version.txt)
-                        echo $VERSION
+                        env.VERSION = $VERSION
                     '''
                   }
                 }
@@ -94,9 +93,9 @@ spec:
                     {
                       sh """
                           docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-                          docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-                          docker tag ${IMAGE_NAME}:${IMAGE_TAG} ${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
-                          docker push ${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
+                          docker build -t ${IMAGE_NAME}:${env.VERSION} .
+                          docker tag ${IMAGE_NAME}:${env.VERSION} ${REPO}/${IMAGE_NAME}:${env.VERSION}
+                          docker push ${REPO}/${IMAGE_NAME}:${env.VERSION}
                       """
                     }
                   }
