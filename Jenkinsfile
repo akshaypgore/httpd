@@ -76,10 +76,12 @@ spec:
         stage('Read app propertites'){
             steps {
                 container('buildtools') {
+                  script {
                     sh """
                       VERSION=$(cat src/version.txt)
                       echo $VERSION
                     """
+                  }
                 }
             }
         }
