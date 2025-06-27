@@ -66,9 +66,7 @@ spec:
                         // def releaseName = "myapp-${params.ENVIRONMENT}"
                         sh """
                             helm version
-                            // helm repo add myrepo https://example.com/helm-charts
-                            // helm repo update
-                            // helm upgrade --install ${releaseName} myrepo/${chartName} --namespace ${params.ENVIRONMENT} --set image.tag=${params.VERSION}
+                            
                         """
                     }
                 }
