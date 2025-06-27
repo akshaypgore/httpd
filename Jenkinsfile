@@ -77,10 +77,10 @@ spec:
             steps {
                 container('buildtools') {
                   script {
-                    sh """
-                      VERSION=$(cat src/version.txt)
-                      echo $VERSION
-                    """
+                    sh '''
+                        VERSION=$(cat src/version.txt)
+                        echo $VERSION
+                    '''
                   }
                 }
             }
