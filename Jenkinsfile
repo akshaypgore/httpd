@@ -61,7 +61,7 @@ spec:
     environment {
         IMAGE_NAME = 'myapp'
         IMAGE_TAG = "${BUILD_NUMBER}"
-        REPO = 'akshaypgore'
+        REPO = 'akshaygore'
     }
     
     stages {
