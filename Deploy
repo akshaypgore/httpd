@@ -65,7 +65,9 @@ spec:
                         def chartName = 'app-1.0.0.tgz'
                         sh """
                             helm version
-                            ls -l
+                            helm repo add helm-charts https://akshaypgore.github.io/helm-charts
+                            helm repo update
+                            helm upgrade --install --namespace ${params.ENVIRONMENT} httpd ${chartName}  --values values.yaml
                         """
                     }
                 }
