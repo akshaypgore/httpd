@@ -81,6 +81,24 @@ spec:
                 }
             }
         }
+
+        stage('Push Docker Image') {
+            steps {
+                container('docker') {
+                    withCredentials(
+                      [usernamePassword(
+                        credentialsId: 'dockerhub-credentials',
+                        usernameVariable: 'DOCKER_USERNAME',
+                        passwordVariable: 'DOCKER_PASSWORD'
+                      )]) {
+                    }
+                    sh """
+                        docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
+                        docker push akshaypgore/${IMAGE_NAME}:${IMAGE_TAG}
+                    """
+                }
+            }
+        }
     }
     
 }
