@@ -93,8 +93,9 @@ spec:
                       )]) {
                     }
                     sh """
+                        REPO = "akshaypgore"
                         docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}
-                        docker push akshaypgore/${IMAGE_NAME}:${IMAGE_TAG}
+                        docker push ${REPO}/${IMAGE_NAME}:${IMAGE_TAG}
                     """
                 }
             }
