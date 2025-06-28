@@ -48,7 +48,7 @@ spec:
     }
 
     parameters {
-        choice(name: 'ENVIRONMENT', choices: ['dev', 'qa', 'prod'], description: 'Select the environment')
+        choice(name: 'ENVIRONMENT', choices: ['default','dev','qa','prod'], description: 'Select the environment')
         string(name: 'VERSION', defaultValue: 'latest', description: 'Version of the application to deploy')
     }
     stages {
