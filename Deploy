@@ -67,7 +67,12 @@ spec:
                             helm version
                             helm repo add helm-charts https://akshaypgore.github.io/helm-charts/
                             helm repo update
-                            helm install httpd helm-charts/app --version 1.1.0 --values values.yaml --namespace ${params.ENVIRONMENT}
+                            if [ "${params.VERSION}" = 'dev' ]; then
+                                echo "Using development version"
+                                helm upgrade --install httpd helm-charts/app --version 1.1.0 --values values.yaml --values dev.yaml --namespace ${params.ENVIRONMENT}
+                            else
+                                helm upgrade --install httpd helm-charts/app --version 1.1.0 --values values.yaml --namespace ${params.ENVIRONMENT}
+                            fi
                         """
                     }
                 }
