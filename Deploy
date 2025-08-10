@@ -65,7 +65,7 @@ spec:
               script {
                 checkout(
                   [
-                  $class: 'GitSCM', branches: [[name: 'main']],
+                  $class: 'GitSCM', branches: [[name: 'master']],
                   userRemoteConfigs: [
                     [url: 'https://github.com/akshaypgore/devops-envs',
                      extensions: [[$class: 'CheckoutToSubdirectory', subdirectory: 'env_files']]
