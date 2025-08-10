@@ -1,4 +1,5 @@
-app: httpd
-image:
-  repository: akshaygore/httpd
-  tag: 1.0.0
+appname: app-1
+examplemap:
+       env:
+        - name: "target"
+          value: "dev"

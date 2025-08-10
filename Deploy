@@ -59,6 +59,26 @@ spec:
             }
         }
 
+        stage('Checkout code for app and devops repos') {
+          steps {
+            container('jnlp') {
+              script {
+                checkout(
+                  [
+                  $class: 'GitSCM', branches: [[name: 'main']],
+                  userRemoteConfigs: [
+                    [url: 'https://github.com/akshaypgore/devops-envs',
+                     extensions: [[$class: 'CheckoutToSubdirectory', subdirectory: 'env_files']]
+                    ]
+                    ]
+                  ]
+                  )
+                checkout scm
+              }
+            }
+          }
+        }
+
         stage('Helm Install') {
             steps {
                 container('helm') {
@@ -69,9 +89,9 @@ spec:
                             helm repo update
                             if [ "${params.VERSION}" = 'dev' ]; then
                                 echo "Using development version"
-                                helm upgrade --install httpd helm-charts/app --version 1.1.0 --values values.yaml --values dev.yaml --namespace ${params.ENVIRONMENT}
+                                helm upgrade --install httpd helm-charts/app-template --version 1.0.0 --values values.yaml --values env_files/dev.yaml --namespace ${params.ENVIRONMENT}
                             else
-                                helm upgrade --install httpd helm-charts/app --version 1.1.0 --values values.yaml --namespace ${params.ENVIRONMENT}
+                                helm upgrade --install httpd helm-charts/app-template --version 1.0.0 --values values.yaml --namespace ${params.ENVIRONMENT}
                             fi
                         """
                     }
